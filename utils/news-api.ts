@@ -1,5 +1,8 @@
-const NEWS_API_KEY = process.env.NEWS_API_KEY;
-const NEWS_API_ENDPOINT = "https://newsapi.org/v2/top-headlines";
+import analyzeSentiment from "@/services/sentiment-analysis";
+
+const apiKey = process.env.NEXT_PUBLIC_NEWS_API_KEY;
+const apiUrl = "https://newsapi.org/v2/top-headlines";
+const country = "us";
 
 export interface NewsArticle {
 	title: string;
@@ -10,22 +13,33 @@ export interface NewsArticle {
 	urlToImage: string;
 }
 
-export const getNewsArticles = async () => {
+export const fetchNews = async (): Promise<NewsArticle[]> => {
 	try {
 		const response = await fetch(
-			`${NEWS_API_ENDPOINT}?apiKey=${NEWS_API_KEY}&country=us&category=general`
+			`${apiUrl}?country=${country}&apiKey=${apiKey}`
 		);
-
-		if (!response.ok) {
-			throw new Error(
-				`Failed to fetch news articles. Status: ${response.status}`
-			);
-		}
-
 		const data = await response.json();
-		return data.articles || [];
+
+		if (data.status === "ok") {
+			const filteredArticles = data.articles
+				.filter((article: any) => article.title !== "[Removed]") // filter out [Removed] title
+				.map((article: any) => ({
+					title: article.title,
+					description: article.description,
+					author: article.author || "Anonymous", // replace null authors with "Anonymous"
+					publishedAt: article.publishedAt,
+					url: article.url,
+					urlToImage: article.urlToImage,
+					sentimentScore: analyzeSentiment(article.title), // add sentiment analysis score
+				}))
+				.filter((article: any) => article.sentimentScore > 0); // filter out only positive articles
+
+			return filteredArticles;
+		} else {
+			throw new Error("Error fetching news");
+		}
 	} catch (error) {
-		console.error("Error fetching news articles:", error);
-		return [];
+		console.error("Error fetching news:", error);
+		throw new Error("Error fetching news");
 	}
 };
