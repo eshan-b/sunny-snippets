@@ -46,6 +46,7 @@ Sunny Snippets is a positive news web application built with Next.js and Tailwin
 - <img src="./images/nextjs-logo.png" alt="Next.js Logo" height="20" width="20"/> [Next.js](https://nextjs.org/)
 - <img src="./images/react-logo.png" alt="React Logo" height="20" width="20"/> [React](https://reactjs.org/)
 - <img src="./images/tailwindcss-logo.png" alt="Tailwind CSS Logo" height="20" width="20"/> [Tailwind CSS](https://tailwindcss.com/)
+- <img src="./images/daisyUI-logo.png" alt="DaisyUI Logo" height="20" width="20"/> [DaisyUI](https://daisyui.com/)
 - <img src="./images/newsapi-logo.png" alt="JS Logo" height="20" width="20"/> [NewsAPI](https://newsapi.org/)
 - <img src="./images/npm-logo.png" alt="Sentiment Logo" height="20" width="20"/> [sentiment](https://www.npmjs.com/package/sentiment) library (AFINN sentiment analysis)
 - <img src="./images/js-logo.png" alt="JS Logo" height="20" width="20"/> [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API)

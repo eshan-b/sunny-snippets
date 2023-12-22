@@ -1,11 +1,39 @@
+import Image from "next/image";
+import heroImage from "../assets/dream-isometric 1.svg";
+
 const HeroSection = () => {
   return (
-    <div className="bg-blue-200 p-8 text-center">
-      <h1 className="text-4xl font-bold mb-4">Welcome to Sunny Snippets!</h1>
-      <p className="text-lg text-gray-700">
-        Your go-to source for positive news that brightens your day. Discover
-        uplifting stories and sunny snippets from around the world.
-      </p>
+    <div className="hero min-h-[75vh] bg-gradient-to-b from-peach-orange to-white">
+      <div className="text-center pt-10">
+        <h1
+          className="font-bold"
+          style={{ fontSize: "5rem", letterSpacing: "0.16em" }}
+        >
+          <span className="text-dark-orange1">START </span>
+          <span className="text-dark-orange2">YOUR </span>
+          <span className="text-dark-orange3">DAY</span>
+        </h1>
+        <Image
+          src={heroImage}
+          alt="Sleeping Illustration"
+          className="mt-2 mx-auto rounded-lg"
+          style={{ maxWidth: "70%" }}
+          priority={true}
+          placeholder="blur"
+          blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg=="
+          objectFit="cover"
+          objectPosition="center"
+          decoding="async"
+          referrerPolicy="no-referrer"
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw"
+        />
+        <p
+          className="text-3xl text-dark-orange3 mt-2 font-bold"
+          style={{ letterSpacing: "0.16em" }}
+        >
+          with a ray of sunshine
+        </p>
+      </div>
     </div>
   );
 };

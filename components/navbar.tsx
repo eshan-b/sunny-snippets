@@ -1,15 +1,101 @@
+import { Pacifico } from "next/font/google";
+
+const pacifico = Pacifico({
+  subsets: ["latin"],
+  weight: "400",
+});
+
+const dropdownIcon = (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    className="h-5 w-5"
+    fill="none"
+    viewBox="0 0 24 24"
+    stroke="white"
+  >
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth="2"
+      d="M4 6h16M4 12h8m-8 6h16"
+    />
+  </svg>
+);
 const Navbar = () => {
   return (
-    <nav className="bg-blue-500 p-4 flex justify-between items-center">
-      <div>
-        {/* Your logo goes here */}
-        <span className="text-white font-bold text-xl">Logo</span>
+    <div className="navbar bg-primary">
+      <div className="navbar-start">
+        {/* Mobile */}
+        <div className="dropdown">
+          <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
+            {dropdownIcon}
+          </div>
+          <ul
+            tabIndex={0}
+            className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
+          >
+            <li>
+              <a>ABOUT</a>
+            </li>
+            <li>
+              <a>NEWS</a>
+            </li>
+            <li>
+              <a>CONTACT</a>
+            </li>
+          </ul>
+        </div>
+        <a
+          className={`${pacifico.className} text-white btn btn-ghost text-2xl`}
+        >
+          Sunny Snippets
+        </a>
       </div>
-      <div>
-        {/* Login button goes here */}
-        <button className="text-white">Login</button>
+      {/* Desktop */}
+      <div className="navbar-center hidden lg:flex">
+        <ul className="menu menu-horizontal px-1">
+          <li>
+            <a className="text-white text-lg">ABOUT</a>
+          </li>
+          <li>
+            <a className="text-white text-lg">NEWS</a>
+          </li>
+          <li>
+            <a className="text-white text-lg">CONTACT</a>
+          </li>
+        </ul>
       </div>
-    </nav>
+      <div className="navbar-end">
+        <div className="dropdown dropdown-end">
+          <div
+            tabIndex={0}
+            role="button"
+            className="btn btn-ghost btn-circle avatar"
+          >
+            <div className="w-10 rounded-full">
+              <img
+                alt="Profile Icon"
+                src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"
+              />
+            </div>
+          </div>
+          <ul
+            tabIndex={0}
+            className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52"
+          >
+            <li>
+              <a className="justify-between">Profile</a>
+            </li>
+            <li>
+              <a>Settings</a>
+            </li>
+            <li>
+              <a>Logout</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
   );
 };
 
