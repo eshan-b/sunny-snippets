@@ -16,6 +16,8 @@ Sunny Snippets is a positive news web application built with Next.js and Tailwin
 
 - Node.js installed on your machine.
 - NewsAPI key. Obtain it [here](https://newsapi.org/).
+- Clerk Key
+- Firebase key
 
 ### Installation
 
@@ -43,13 +45,18 @@ Sunny Snippets is a positive news web application built with Next.js and Tailwin
 
 ## Technologies Used
 
-- <img src="./images/nextjs-logo.png" alt="Next.js Logo" height="20" width="20"/> [Next.js](https://nextjs.org/)
-- <img src="./images/react-logo.png" alt="React Logo" height="20" width="20"/> [React](https://reactjs.org/)
-- <img src="./images/tailwindcss-logo.png" alt="Tailwind CSS Logo" height="20" width="20"/> [Tailwind CSS](https://tailwindcss.com/)
-- <img src="./images/daisyUI-logo.png" alt="DaisyUI Logo" height="20" width="20"/> [DaisyUI](https://daisyui.com/)
-- <img src="./images/newsapi-logo.png" alt="JS Logo" height="20" width="20"/> [NewsAPI](https://newsapi.org/)
-- <img src="./images/npm-logo.png" alt="Sentiment Logo" height="20" width="20"/> [sentiment](https://www.npmjs.com/package/sentiment) library (AFINN sentiment analysis)
-- <img src="./images/js-logo.png" alt="JS Logo" height="20" width="20"/> [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API)
+<!-- prettier-ignore -->
+| Technology | Purpose |
+|------------|---------|
+| <img src="./images/nextjs-logo.png" alt="Next.js Logo" height="20" width="20"/> [Next.js](https://nextjs.org/) | React framework for building web applications |
+| <img src="./images/react-logo.png" alt="React Logo" height="20" width="20"/> [React](https://reactjs.org/) | JavaScript library for building user interfaces |
+| <img src="./images/tailwindcss-logo.png" alt="Tailwind CSS Logo" height="20" width="20"/> [Tailwind CSS](https://tailwindcss.com/) | Utility-first CSS framework for styling |
+| <img src="./images/daisyUI-logo.png" alt="DaisyUI Logo" height="20" width="20"/> [DaisyUI](https://daisyui.com/) | UI library for Tailwind CSS with theming support |
+| <img src="./images/newsapi-logo.png" alt="JS Logo" height="20" width="20"/> [NewsAPI](https://newsapi.org/) | API for fetching news articles |
+| <img src="./images/npm-logo.png" alt="Sentiment Logo" height="20" width="20"/> [sentiment](https://www.npmjs.com/package/sentiment) | AFINN sentiment analysis library |
+| <img src="./images/js-logo.png" alt="JS Logo" height="20" width="20"/> [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) | Web API for making HTTP requests |
+| <img src="./images/clerk-logo.png" alt="JS Logo" height="20" width="20"/> [Clerk](https://clerk.com) | Multi-Factor Authentication service |
+| <img src="./images/firebase-logo.png" alt="JS Logo" height="20" width="20"/> [Firebase](https://firebase.google.com/) | NoSQL database for a serverless backend |
 
 ## Contributing
 

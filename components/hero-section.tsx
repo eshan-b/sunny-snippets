@@ -4,7 +4,7 @@ import heroImage from "../assets/dream-isometric 1.svg";
 const HeroSection = () => {
   return (
     <div className="hero min-h-[75vh] bg-gradient-to-b from-peach-orange to-white">
-      <div className="text-center pt-10">
+      <div className="text-center pt-5">
         <h1
           className="font-bold"
           style={{ fontSize: "5rem", letterSpacing: "0.16em" }}
@@ -17,15 +17,14 @@ const HeroSection = () => {
           src={heroImage}
           alt="Sleeping Illustration"
           className="mt-2 mx-auto rounded-lg"
-          style={{ maxWidth: "70%" }}
+          style={{
+            maxWidth: "70%",
+            objectFit: "cover",
+            objectPosition: "center",
+          }}
           priority={true}
-          placeholder="blur"
-          blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg=="
-          objectFit="cover"
-          objectPosition="center"
           decoding="async"
           referrerPolicy="no-referrer"
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw"
         />
         <p
           className="text-3xl text-dark-orange3 mt-2 font-bold"
