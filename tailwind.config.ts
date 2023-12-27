@@ -1,10 +1,12 @@
 import type { Config } from "tailwindcss";
+import { nextui } from "@nextui-org/react";
 
 const config: Config = {
   content: [
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}",
   ],
 
   theme: {
@@ -27,33 +29,30 @@ const config: Config = {
         "4rem": "4rem",
         "5rem": "5rem",
       },
-    },
-  },
-  plugins: [require("daisyui")],
-
-  daisyui: {
-    themes: [
-      {
-        mytheme: {
-          primary: "#f1a400",
-          secondary: "#ffc94e",
-          accent: "#d97706",
-          neutral: "#ff8c00",
-          "base-100": "#ffffff",
-          info: "#ff964f",
-          success: "#77dd77",
-          warning: "#fdfd96",
-          error: "#ff6961",
+      borderRadius: {
+        lg: "var(--radius)",
+        md: "calc(var(--radius) - 2px)",
+        sm: "calc(var(--radius) - 4px)",
+      },
+      keyframes: {
+        "accordion-down": {
+          from: { height: "0" },
+          to: { height: "var(--radix-accordion-content-height)" },
+        },
+        "accordion-up": {
+          from: { height: "var(--radix-accordion-content-height)" },
+          to: { height: "0" },
         },
       },
-    ],
-    darkTheme: "dark", // name of one of the included themes for dark mode
-    base: true, // applies background color and foreground color for root element by default
-    styled: true, // include daisyUI colors and design decisions for all components
-    utils: true, // adds responsive and modifier utility classes
-    prefix: "", // prefix for daisyUI classnames (components, modifiers and responsive class names. Not colors)
-    logs: true, // Shows info about daisyUI version and used config in the console when building your CSS
-    themeRoot: ":root", // The element that receives theme color CSS variables
+      animation: {
+        "accordion-down": "accordion-down 0.2s ease-out",
+        "accordion-up": "accordion-up 0.2s ease-out",
+      },
+    },
   },
+
+  plugins: [nextui(), require("tailwindcss-animate")],
+
+  darkMode: "class",
 };
 export default config;

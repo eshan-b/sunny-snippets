@@ -3,7 +3,7 @@ import heroImage from "../assets/dream-isometric 1.svg";
 
 const HeroSection = () => {
   return (
-    <div className="hero min-h-[75vh] bg-gradient-to-b from-peach-orange to-white">
+    <div className="min-h-[75vh] bg-gradient-to-b from-peach-orange to-white">
       <div className="text-center pt-5">
         <h1
           className="font-bold"

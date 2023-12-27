@@ -3,6 +3,7 @@ import { Inria_Sans } from "next/font/google";
 import "./globals.css";
 
 import { ClerkProvider } from "@clerk/nextjs";
+import { Providers } from "./ui-providers";
 
 const inria_sans = Inria_Sans({
   subsets: ["latin"],
@@ -22,7 +23,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <ClerkProvider>
-        <body className={inria_sans.className}>{children}</body>
+        <body className={inria_sans.className}>
+          <Providers>{children}</Providers>
+        </body>
       </ClerkProvider>
     </html>
   );
