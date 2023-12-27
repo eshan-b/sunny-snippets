@@ -1,7 +1,6 @@
 import analyzeSentiment from "@/services/sentiment-analysis";
 
-// const apiKey = process.env.NEXT_PUBLIC_NEWS_API_KEY;
-const apiKey = "";
+const apiKey = process.env.NEXT_PUBLIC_NEWS_API_KEY;
 const apiUrl = "https://newsapi.org/v2/top-headlines";
 const country = "us";
 
@@ -14,10 +13,10 @@ export interface NewsArticle {
   urlToImage: string;
 }
 
-export const fetchNews = async (): Promise<NewsArticle[]> => {
+export const fetchNews = async (page: number): Promise<NewsArticle[]> => {
   try {
     const response = await fetch(
-      `${apiUrl}?country=${country}&apiKey=${apiKey}`
+      `${apiUrl}?country=${country}&apiKey=${apiKey}&page=${page}`
     );
     const data = await response.json();
 

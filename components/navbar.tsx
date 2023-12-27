@@ -9,11 +9,13 @@ import logoImage from "../assets/sunny-logo.png";
 import { SignInButton, SignUpButton } from "@clerk/nextjs";
 import { auth } from "@clerk/nextjs";
 
+// Fonts
 const pacifico = Pacifico({
   subsets: ["latin"],
   weight: "400",
 });
 
+// NextUI
 import {
   Navbar,
   NavbarBrand,
@@ -23,6 +25,7 @@ import {
   Button,
 } from "@nextui-org/react";
 
+// Client-side Dropdown
 import ProfileDropdown from "./profile-dropdown";
 
 export default async function App() {
