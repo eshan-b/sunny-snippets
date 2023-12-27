@@ -68,6 +68,7 @@ const NewsSection = () => {
       <div className="flex justify-center">
         <Pagination
           showControls
+          color="warning"
           total={3}
           initialPage={currentPage}
           onChange={handlePageChange}

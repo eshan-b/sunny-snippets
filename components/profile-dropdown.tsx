@@ -1,7 +1,8 @@
 "use client";
 
 // Clerk Authentication
-import { useUser, SignOutButton } from "@clerk/nextjs";
+import { useUser, SignOutButton, useClerk } from "@clerk/nextjs";
+import { useRouter } from "next/navigation";
 
 // NextUI
 import {
@@ -16,6 +17,9 @@ import {
 import blankUser from "../assets/blank_user.svg";
 
 function ProfileDropdown() {
+  const { signOut } = useClerk();
+  const router = useRouter();
+
   const { isLoaded, isSignedIn, user } = useUser();
 
   if (!isLoaded || !isSignedIn) {
@@ -43,7 +47,11 @@ function ProfileDropdown() {
           </DropdownItem>
           <DropdownItem key="settings">My Settings</DropdownItem>
           <DropdownItem key="logout" color="danger">
-            <SignOutButton></SignOutButton>
+            <>
+              <button onClick={() => signOut(() => router.push("/"))}>
+                Sign Out
+              </button>
+            </>
           </DropdownItem>
         </DropdownMenu>
       </Dropdown>

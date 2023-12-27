@@ -6,7 +6,7 @@ import Image from "next/image";
 import logoImage from "../assets/sunny-logo.png";
 
 // Clerk authentication
-import { SignInButton, SignUpButton } from "@clerk/nextjs";
+import { SignInButton, SignUpButton, UserButton } from "@clerk/nextjs";
 import { auth } from "@clerk/nextjs";
 
 // Fonts
@@ -49,29 +49,11 @@ export default async function App() {
         </p>
       </NavbarBrand>
 
-      {/* Main Links */}
-      <NavbarContent className="hidden sm:flex gap-16" justify="center">
-        <NavbarItem>
-          <Link className="text-white text-xl" color="foreground" href="#">
-            ABOUT
-          </Link>
-        </NavbarItem>
-        <NavbarItem>
-          <Link className="text-white text-xl" href="#">
-            NEWS
-          </Link>
-        </NavbarItem>
-        <NavbarItem>
-          <Link className="text-white text-xl" color="foreground" href="#">
-            CONTACT
-          </Link>
-        </NavbarItem>
-      </NavbarContent>
-
       {/* Login Buttons */}
       {userId ? (
         <NavbarContent as="div" justify="end">
           <ProfileDropdown />
+          {/* <UserButton afterSignOutUrl="/" /> */}
         </NavbarContent>
       ) : (
         <NavbarContent justify="end">
