@@ -1,7 +1,7 @@
 "use client";
 
 // Clerk Authentication
-import { useUser, SignOutButton, useClerk } from "@clerk/nextjs";
+import { useUser, useClerk } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
 
 // NextUI

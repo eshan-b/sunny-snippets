@@ -6,7 +6,7 @@ import Image from "next/image";
 import logoImage from "../assets/sunny-logo.png";
 
 // Clerk authentication
-import { SignInButton, SignUpButton, UserButton } from "@clerk/nextjs";
+import { SignInButton, SignUpButton } from "@clerk/nextjs";
 import { auth } from "@clerk/nextjs";
 
 // Fonts
@@ -53,7 +53,6 @@ export default async function App() {
       {userId ? (
         <NavbarContent as="div" justify="end">
           <ProfileDropdown />
-          {/* <UserButton afterSignOutUrl="/" /> */}
         </NavbarContent>
       ) : (
         <NavbarContent justify="end">
