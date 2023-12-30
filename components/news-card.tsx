@@ -1,5 +1,8 @@
 "use client";
 
+// Image (NextJS)
+import Image from "next/image";
+
 // Modal Components
 import ShareModal from "./share-modal";
 
@@ -92,9 +95,11 @@ const NewsCard = ({
     <>
       <Card className="max-w-[400px]">
         <CardHeader className="flex gap-3">
-          <img
+          <Image
             src={urlToImage}
             alt={title}
+            width={640}
+            height={320}
             className="mb-4 rounded-lg w-full h-32 object-cover"
           />
         </CardHeader>
