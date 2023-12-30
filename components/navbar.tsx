@@ -58,7 +58,9 @@ export default async function App() {
         <NavbarContent justify="end">
           <NavbarItem className="hidden lg:flex">
             <SignInButton mode="modal">
-              <Link className="text-white text-xl">Login</Link>
+              <Button variant="light" className="text-white text-xl">
+                Login
+              </Button>
             </SignInButton>
           </NavbarItem>
           <NavbarItem>

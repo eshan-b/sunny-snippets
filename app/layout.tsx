@@ -2,8 +2,12 @@ import type { Metadata } from "next";
 import { Inria_Sans } from "next/font/google";
 import "./globals.css";
 
+// Providers
 import { ClerkProvider } from "@clerk/nextjs";
 import { Providers } from "./ui-providers";
+
+// Toast Root
+import { Toaster } from "react-hot-toast";
 
 const inria_sans = Inria_Sans({
   subsets: ["latin"],
@@ -45,6 +49,7 @@ export default function RootLayout({
       <ClerkProvider>
         <body className={inria_sans.className}>
           <Providers>{children}</Providers>
+          <Toaster position="bottom-right" reverseOrder={false} />
         </body>
       </ClerkProvider>
     </html>

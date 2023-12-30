@@ -1,6 +1,6 @@
 "use client";
 
-// Modal Component
+// Modal Components
 import ShareModal from "./share-modal";
 
 // Icons
@@ -18,6 +18,10 @@ import {
   Button,
   useDisclosure,
 } from "@nextui-org/react";
+
+// Toast
+import toast from "react-hot-toast";
+const notify = () => toast.success("Article added");
 
 interface NewsCardProps {
   title: string;
@@ -48,14 +52,17 @@ const NewsCard = ({
   url,
   urlToImage,
 }: NewsCardProps) => {
-  const { isOpen, onOpen, onOpenChange, onClose } = useDisclosure();
+  // Share modal hooks
+  const {
+    isOpen: isShareModalOpen,
+    onOpen: onShareModalOpen,
+    onClose: onShareModalClose,
+    onOpenChange: onShareModalOpenChange,
+  } = useDisclosure();
 
+  // Share option function
   const handleShareOption = (option: string) => {
     switch (option) {
-      case "copyLink":
-        // Implement the logic for copying the article link to the clipboard
-        console.log("Copying link to clipboard");
-        break;
       case "email":
         const emailSubject = encodeURIComponent(title);
         const emailBody = encodeURIComponent(`${title}\n${url}`);
@@ -78,7 +85,7 @@ const NewsCard = ({
     }
 
     // Close once action is complete
-    onClose();
+    onShareModalClose();
   };
 
   return (
@@ -116,7 +123,12 @@ const NewsCard = ({
             </Link>
             <div className="flex items-end gap-2 ml-auto">
               {/* Like Button */}
-              <Button isIconOnly color="warning" aria-label="Like">
+              <Button
+                isIconOnly
+                color="warning"
+                aria-label="Like"
+                onClick={notify}
+              >
                 <StarIcon />
               </Button>
 
@@ -125,16 +137,16 @@ const NewsCard = ({
                 isIconOnly
                 color="default"
                 aria-label="Share"
-                onClick={onOpen}
+                onClick={onShareModalOpen}
               >
                 <ShareIcon />
               </Button>
 
               {/* Share Modal */}
               <ShareModal
-                isOpen={isOpen}
-                onClose={onClose}
-                onOpenChange={onOpenChange}
+                isOpen={isShareModalOpen}
+                onClose={onShareModalClose}
+                onOpenChange={onShareModalOpenChange}
                 onShareOption={handleShareOption}
                 articleUrl={url}
               />

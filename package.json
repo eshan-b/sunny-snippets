@@ -22,6 +22,7 @@
     "next-auth": "^4.24.5",
     "react": "^18",
     "react-dom": "^18",
+    "react-hot-toast": "^2.4.1",
     "react-icons": "^4.12.0",
     "sentiment": "^5.0.2",
     "tailwind-merge": "^2.2.0",
