@@ -24,7 +24,12 @@ import {
 
 // Toast
 import toast from "react-hot-toast";
-const notify = () => toast.success("Article added");
+
+// Firestore
+import { addNewsArticle, saveArticleForUser } from "@/utils/firestore";
+
+// Clerk Authentication
+import { useAuth } from "@clerk/nextjs";
 
 interface NewsCardProps {
   title: string;
@@ -91,6 +96,46 @@ const NewsCard = ({
     onShareModalClose();
   };
 
+  // Clerk Authentication
+  const { isLoaded, userId } = useAuth();
+
+  // In case the user signs out while on the page.
+  if (!isLoaded || !userId) {
+    return null;
+  }
+
+  console.log(userId);
+
+  // Save button function
+  const handleSaveOption = async () => {
+    if (userId) {
+      try {
+        const articleId = await addNewsArticle({
+          title,
+          description,
+          author,
+          publishedAt,
+          url,
+          urlToImage,
+        });
+
+        // Next, save the article for the user
+        await saveArticleForUser(userId, articleId);
+
+        // Display success message
+        toast.success("Article added to your saved list!");
+      } catch (error) {
+        console.error("Error adding news article:", error);
+        // Display an error message
+        toast.error("Failed to save the article. Please try again later.");
+      }
+    } else {
+      // TODO: Display a message or redirect to login if the user is not authenticated
+      console.log("User not authenticated. Redirecting to login...");
+      return;
+    }
+  };
+
   return (
     <>
       <Card className="max-w-[400px]">
@@ -130,9 +175,9 @@ const NewsCard = ({
               {/* Like Button */}
               <Button
                 isIconOnly
-                color="warning"
-                aria-label="Like"
-                onClick={notify}
+                color="default"
+                aria-label="Save"
+                onClick={handleSaveOption}
               >
                 <StarIcon />
               </Button>

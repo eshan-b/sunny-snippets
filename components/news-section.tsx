@@ -63,6 +63,7 @@ const NewsSection = () => {
           total={3}
           initialPage={currentPage}
           onChange={handlePageChange}
+          className="mt-5"
         />
       </div>
     </div>

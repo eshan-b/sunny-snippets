@@ -1,3 +1,5 @@
+"use client";
+
 // Logo font
 import { Pacifico } from "next/font/google";
 
@@ -6,8 +8,13 @@ import Image from "next/image";
 import logoImage from "../assets/sunny-logo.png";
 
 // Clerk authentication
-import { SignInButton, SignUpButton } from "@clerk/nextjs";
-import { auth } from "@clerk/nextjs";
+import {
+  SignInButton,
+  SignUpButton,
+  SignedIn,
+  SignedOut,
+  UserButton,
+} from "@clerk/nextjs";
 
 // Fonts
 const pacifico = Pacifico({
@@ -27,8 +34,8 @@ import {
 // Client-side Dropdown
 import ProfileDropdown from "./profile-dropdown";
 
-export default async function App() {
-  const { userId } = auth();
+export default function App(user: any) {
+  console.log(`Navbar id: ${user.id || "unlucky m8"}`);
 
   return (
     <Navbar position="static" maxWidth={"full"} className="bg-peach-orange">
@@ -48,12 +55,17 @@ export default async function App() {
         </p>
       </NavbarBrand>
 
-      {/* Login Buttons */}
-      {userId ? (
+      {/* Profile Dropdown  */}
+      <SignedIn>
         <NavbarContent as="div" justify="end">
-          <ProfileDropdown />
+          <NavbarItem>
+            <UserButton afterSignOutUrl="/" />
+          </NavbarItem>
         </NavbarContent>
-      ) : (
+      </SignedIn>
+
+      {/* Login Buttons */}
+      <SignedOut>
         <NavbarContent justify="end">
           <NavbarItem className="hidden lg:flex">
             <SignInButton mode="modal">
@@ -74,7 +86,7 @@ export default async function App() {
             </SignUpButton>
           </NavbarItem>
         </NavbarContent>
-      )}
+      </SignedOut>
     </Navbar>
   );
 }
