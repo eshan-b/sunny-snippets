@@ -8,13 +8,7 @@ import Image from "next/image";
 import logoImage from "../assets/sunny-logo.png";
 
 // Clerk authentication
-import {
-  SignInButton,
-  SignUpButton,
-  SignedIn,
-  SignedOut,
-  UserButton,
-} from "@clerk/nextjs";
+import { SignInButton, SignUpButton, SignedIn, SignedOut } from "@clerk/nextjs";
 
 // Fonts
 const pacifico = Pacifico({
@@ -34,9 +28,7 @@ import {
 // Client-side Dropdown
 import ProfileDropdown from "./profile-dropdown";
 
-export default function App(user: any) {
-  console.log(`Navbar id: ${user.id || "unlucky m8"}`);
-
+export default function App() {
   return (
     <Navbar position="static" maxWidth={"full"} className="bg-peach-orange">
       {/* Brand */}
@@ -59,7 +51,7 @@ export default function App(user: any) {
       <SignedIn>
         <NavbarContent as="div" justify="end">
           <NavbarItem>
-            <UserButton afterSignOutUrl="/" />
+            <ProfileDropdown />
           </NavbarItem>
         </NavbarContent>
       </SignedIn>
