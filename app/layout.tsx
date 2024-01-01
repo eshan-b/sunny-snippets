@@ -46,7 +46,11 @@ export default function RootLayout({
           sizes="<generated>"
         />
       </head>
-      <ClerkProvider>
+      <ClerkProvider
+        appearance={{
+          variables: { colorPrimary: "#d97706" },
+        }}
+      >
         <body className={inria_sans.className}>
           <Providers>{children}</Providers>
           <Toaster position="bottom-right" reverseOrder={false} />
