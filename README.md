@@ -28,7 +28,7 @@ Deployed on Vercel: https://sunny-snippets.vercel.app/
 | <img src="./images/react-logo.png" alt="React Logo" height="20" width="20"/> [React](https://reactjs.org/) | JavaScript library for building user interfaces |
 | <img src="./images/tailwindcss-logo.png" alt="Tailwind CSS Logo" height="20" width="20"/> [Tailwind CSS](https://tailwindcss.com/) | Utility-first CSS framework for styling |
 | <img src="./images/nextUI-logo.png" alt="NextUI Logo" height="20" width="20"/> [NextUI](https://nextui.org/) | UI library for Tailwind CSS with theming support |
-| <img src="./images/newsapi-logo.png" alt="JS Logo" height="20" width="20"/> [NewsAPI](https://newsapi.org/) | API for fetching news articles |
+| <img src="./images/guardian-logo.png" alt="JS Logo" height="20" width="20"/> [The Guardian News API](https://open-platform.theguardian.com/) | Open source news API by The Guardian |
 | <img src="./images/npm-logo.png" alt="Sentiment Logo" height="20" width="20"/> [sentiment](https://www.npmjs.com/package/sentiment) | AFINN sentiment analysis library |
 | <img src="./images/js-logo.png" alt="JS Logo" height="20" width="20"/> [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) | Web API for making HTTP requests |
 | <img src="./images/clerk-logo.png" alt="JS Logo" height="20" width="20"/> [Clerk](https://clerk.com) | Multi-Factor Authentication service |

@@ -1,8 +1,7 @@
 import analyzeSentiment from "@/services/sentiment-analysis";
 
-const apiKey = process.env.NEXT_PUBLIC_NEWS_API_KEY;
-const apiUrl = "https://newsapi.org/v2/top-headlines";
-const country = "us";
+const apiKey = process.env.NEXT_PUBLIC_GUARDIAN_NEWS_API_KEY;
+const apiUrl = "http://content.guardianapis.com/search";
 
 export interface NewsArticle {
   title: string;
@@ -13,26 +12,70 @@ export interface NewsArticle {
   urlToImage: string;
 }
 
+interface GuardianApiResponse {
+  response: {
+    status: string;
+    results: GuardianApiArticle[];
+  };
+}
+
+interface GuardianApiArticle {
+  id: string;
+  type: string;
+  sectionId: string;
+  sectionName: string;
+  webPublicationDate: string;
+  webTitle: string;
+  webUrl: string;
+  apiUrl: string;
+  fields: {
+    trailText: string; // Update to include trailText for description
+    thumbnail: string;
+  };
+  tags: GuardianApiTag[];
+  isHosted: boolean;
+  pillarId: string;
+  pillarName: string;
+}
+
+interface GuardianApiTag {
+  id: string;
+  type: string;
+  webTitle: string;
+  webUrl: string;
+  apiUrl: string;
+  bio: string;
+  firstName: string;
+  lastName: string;
+}
+
 export const fetchNews = async (page: number): Promise<NewsArticle[]> => {
   try {
     const response = await fetch(
-      `${apiUrl}?country=${country}&apiKey=${apiKey}&page=${page}`
+      `${apiUrl}?page=${page}&api-key=${apiKey}&show-fields=thumbnail,trailText&show-tags=contributor`
     );
-    const data = await response.json();
+    const data: GuardianApiResponse = await response.json();
 
-    if (data.status === "ok") {
-      const filteredArticles = data.articles
-        .filter((article: any) => article.title !== "[Removed]") // filter out [Removed] title
-        .map((article: any) => ({
-          title: article.title,
-          description: article.description,
-          author: article.author || "Anonymous", // replace null authors with "Anonymous"
-          publishedAt: article.publishedAt,
-          url: article.url,
-          urlToImage: article.urlToImage,
-          sentimentScore: analyzeSentiment(article.title), // add sentiment analysis score
-        }))
-        .filter((article: any) => article.sentimentScore > 0); // filter out only positive articles
+    if (data.response.status === "ok") {
+      const filteredArticles = data.response.results
+        .filter((article) => article.webTitle !== "[Removed]") // filter out [Removed] title
+        .map((article) => {
+          const author =
+            article.tags && article.tags.length > 0
+              ? article.tags[0].webTitle
+              : "Anonymous";
+
+          return {
+            title: article.webTitle,
+            description: article.fields.trailText, // Use trailText for description
+            author: author,
+            publishedAt: article.webPublicationDate,
+            url: article.webUrl,
+            urlToImage: article.fields.thumbnail,
+            sentimentScore: analyzeSentiment(article.webTitle), // add sentiment analysis score
+          };
+        })
+        .filter((article) => article.sentimentScore > 0); // filter out only positive articles
 
       return filteredArticles;
     } else {

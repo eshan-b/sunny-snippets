@@ -62,7 +62,7 @@ const NewsSection = () => {
         <Pagination
           showControls
           color="warning"
-          total={3}
+          total={10}
           initialPage={currentPage}
           onChange={handlePageChange}
           className="mt-5"
