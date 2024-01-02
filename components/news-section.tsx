@@ -39,22 +39,24 @@ const NewsSection = () => {
   console.log(newsArticles);
 
   return (
-    <div className="container mx-auto mt-8">
-      {loading && (
-        <div className="flex justify-center mb-4">
-          <Progress
-            size="md"
-            isIndeterminate
-            label="Loading Articles..."
-            aria-label="Loading Articles..."
-            className="max-w-md"
-          />
+    <>
+      <div className="container flex justify-center mx-auto mt-8">
+        {loading && (
+          <div className="flex justify-center mb-4">
+            <Progress
+              size="md"
+              isIndeterminate
+              label="Loading Articles..."
+              aria-label="Loading Articles..."
+              className="max-w-md"
+            />
+          </div>
+        )}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
+          {newsArticles.map((article, index) => (
+            <NewsCard key={index} {...article} showSaveButton={true} />
+          ))}
         </div>
-      )}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {newsArticles.map((article, index) => (
-          <NewsCard key={index} {...article} showSaveButton={true} />
-        ))}
       </div>
       <div className="flex justify-center">
         <Pagination
@@ -66,7 +68,7 @@ const NewsSection = () => {
           className="mt-5"
         />
       </div>
-    </div>
+    </>
   );
 };
 

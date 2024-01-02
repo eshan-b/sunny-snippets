@@ -62,7 +62,7 @@ const ArticlesPage = () => {
 
       <Divider className="my-5" />
 
-      <div className="container mx-auto mt-8">
+      <div className="container flex justify-center mx-auto mt-8">
         {loading && (
           <div className="flex justify-center mb-4">
             <Progress
@@ -74,7 +74,7 @@ const ArticlesPage = () => {
             />
           </div>
         )}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
           {newsArticles.map((article, index) => (
             <NewsCard
               key={index}

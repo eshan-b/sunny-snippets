@@ -1,7 +1,6 @@
 import analyzeSentiment from "@/services/sentiment-analysis";
 
 const apiKey = process.env.NEXT_PUBLIC_NEWS_API_KEY;
-// const apiKey = "";
 const apiUrl = "https://newsapi.org/v2/top-headlines";
 const country = "us";
 

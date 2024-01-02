@@ -2,7 +2,7 @@
 
 Sunny Snippets is a positive news web application built with Next.js and Tailwind CSS. It displays uplifting news articles and provides sentiment analysis to filter out articles with negative sentiment scores.
 
-Deployed on Vercel: https://sunny-snippets-9pib.vercel.app/
+Deployed on Vercel: https://sunny-snippets.vercel.app/
 
 ## Screenshots
 
