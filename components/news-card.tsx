@@ -30,7 +30,7 @@ import toast from "react-hot-toast";
 import { addNewsArticle, saveArticleForUser } from "@/utils/firestore";
 
 // Clerk Authentication
-import { SignIn, useAuth } from "@clerk/nextjs";
+import { useAuth } from "@clerk/nextjs";
 
 // Truncate Function
 import truncateDescription from "@/utils/truncate";
@@ -120,7 +120,7 @@ const NewsCard = ({
       }
     } else {
       // Suggest user to sign in
-      <SignIn />;
+      toast.error("Please sign in to save the article.");
       console.log("User not authenticated. Redirecting to login...");
       return;
     }
@@ -151,9 +151,12 @@ const NewsCard = ({
             {new Date(publishedAt || "").toLocaleDateString()}
           </p>
 
-          <p className="text-gray-700 mb-4">
-            {truncateDescription(description, 2)}
-          </p>
+          <p
+            className="text-gray-700 mb-4"
+            dangerouslySetInnerHTML={{
+              __html: truncateDescription(description, 2) || "",
+            }}
+          />
         </CardBody>
         <Divider />
         <CardFooter>
