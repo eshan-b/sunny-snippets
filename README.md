@@ -2,6 +2,12 @@
 
 Sunny Snippets is a positive news web application built with Next.js and Tailwind CSS. It displays uplifting news articles and provides sentiment analysis to filter out articles with negative sentiment scores.
 
+## Screenshots
+
+<img src="./images/screenshots/home_page.jpeg">
+<img src="./images/screenshots/saved_articles_page.jpeg">
+<img src="./images/screenshots/account_page.jpeg">
+
 ## Features
 
 - Display positive news articles in a card format.
@@ -9,39 +15,6 @@ Sunny Snippets is a positive news web application built with Next.js and Tailwin
 - Hero section with a warm welcome to the app.
 - Integration with the NewsAPI to fetch real-time news data.
 - Sentiment analysis to filter articles based on positivity.
-
-## Getting Started
-
-### Prerequisites
-
-- Node.js installed on your machine.
-- NewsAPI key. Obtain it [here](https://newsapi.org/).
-- Clerk Key
-- Firebase key
-
-### Installation
-
-1. **Clone the Repository**
-
-2. **Install Dependencies**:
-
-   ```bash
-   npm install
-   ```
-
-3. Create a `.env.local` file in the project root and add your NewsAPI key:
-
-   ```bash
-   NEXT_PUBLIC_NEWS_API_KEY=your-news-api-key
-   ```
-
-4. **Run the Application**:
-
-   ```bash
-   npm run dev
-   ```
-
-   The app will be available at http://localhost:3000.
 
 ## Technologies Used
 
