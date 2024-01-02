@@ -8,6 +8,9 @@ import { useState, useEffect } from "react";
 
 // Sub-components
 import NewsCard from "@/components/news-card";
+import PageTransitionWrapper from "./page-transition-wrapper";
+
+// NextUI
 import { Pagination, Progress } from "@nextui-org/react";
 
 const NewsSection = () => {
@@ -40,29 +43,31 @@ const NewsSection = () => {
 
   return (
     <>
-      <div className="container flex justify-center mx-auto mt-8">
-        {loading && (
-          <div className="flex justify-center mb-4">
-            <Progress
-              size="md"
-              isIndeterminate
-              label="Loading Articles..."
-              aria-label="Loading Articles..."
-              className="max-w-md"
-            />
+      <PageTransitionWrapper key={currentPage}>
+        <div className="container mx-auto mt-8 px-12">
+          {loading && (
+            <div className="mb-4">
+              <Progress
+                size="md"
+                isIndeterminate
+                label="Loading Articles..."
+                aria-label="Loading Articles..."
+                className="max-w-screen"
+              />
+            </div>
+          )}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
+            {newsArticles.map((article, index) => (
+              <NewsCard key={index} {...article} showSaveButton={true} />
+            ))}
           </div>
-        )}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
-          {newsArticles.map((article, index) => (
-            <NewsCard key={index} {...article} showSaveButton={true} />
-          ))}
         </div>
-      </div>
+      </PageTransitionWrapper>
       <div className="flex justify-center">
         <Pagination
           showControls
           color="warning"
-          total={10}
+          total={5}
           initialPage={currentPage}
           onChange={handlePageChange}
           className="mt-5"
