@@ -1,7 +1,7 @@
 import analyzeSentiment from "@/services/sentiment-analysis";
 
 const apiKey = process.env.NEXT_PUBLIC_GUARDIAN_NEWS_API_KEY;
-const apiUrl = "http://content.guardianapis.com/search";
+const apiUrl = "https://content.guardianapis.com/search";
 
 export interface NewsArticle {
   title: string;
