@@ -9,6 +9,7 @@ import ShareModal from "./share-modal";
 // Icons
 import ShareIcon from "@/assets/icons/share-icon";
 import StarIcon from "@/assets/icons/star-icon";
+import DeleteIcon from "@/assets/icons/delete-icon";
 
 // NextUI
 import {
@@ -29,28 +30,20 @@ import toast from "react-hot-toast";
 import { addNewsArticle, saveArticleForUser } from "@/utils/firestore";
 
 // Clerk Authentication
-import { useAuth } from "@clerk/nextjs";
+import { SignIn, useAuth } from "@clerk/nextjs";
 
-interface NewsCardProps {
-  title: string;
-  description: string;
-  author: string;
-  publishedAt: string;
-  url: string;
-  urlToImage: string;
+// Truncate Function
+import truncateDescription from "@/utils/truncate";
+
+// Card Interface
+import { NewsCardProps } from "@/types/news-card-props";
+
+// Extend the card interface to support conditionally rendering buttons
+interface NewsCardPropsWithButtons extends NewsCardProps {
+  showSaveButton?: boolean;
+  showDeleteButton?: boolean;
+  onDelete?: () => void;
 }
-
-const truncateDescription = (
-  text: string | null | undefined,
-  sentenceCount: number
-) => {
-  if (!text || typeof text !== "string") {
-    return ""; // or a default value if appropriate
-  }
-
-  const sentences = text.split(". ");
-  return sentences.slice(0, sentenceCount).join(". ") + "...";
-};
 
 const NewsCard = ({
   title,
@@ -59,7 +52,10 @@ const NewsCard = ({
   publishedAt,
   url,
   urlToImage,
-}: NewsCardProps) => {
+  showSaveButton = false,
+  showDeleteButton = false,
+  onDelete,
+}: NewsCardPropsWithButtons) => {
   // Share modal hooks
   const {
     isOpen: isShareModalOpen,
@@ -72,14 +68,14 @@ const NewsCard = ({
   const handleShareOption = (option: string) => {
     switch (option) {
       case "email":
-        const emailSubject = encodeURIComponent(title);
+        const emailSubject = encodeURIComponent(title || "");
         const emailBody = encodeURIComponent(`${title}\n${url}`);
         const emailLink = `mailto:?subject=${emailSubject}&body=${emailBody}`;
         window.location.href = emailLink;
         break;
       case "facebook":
         const facebookShareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
-          url
+          url || ""
         )}`;
         window.open(facebookShareUrl, "_blank");
         break;
@@ -98,7 +94,6 @@ const NewsCard = ({
 
   // Clerk Authentication
   const { userId } = useAuth();
-  console.log(userId);
 
   // Save button function
   const handleSaveOption = async () => {
@@ -124,7 +119,8 @@ const NewsCard = ({
         toast.error("Failed to save the article. Please try again later.");
       }
     } else {
-      // TODO: Display a message or redirect to login if the user is not authenticated
+      // Suggest user to sign in
+      <SignIn />;
       console.log("User not authenticated. Redirecting to login...");
       return;
     }
@@ -135,8 +131,8 @@ const NewsCard = ({
       <Card className="max-w-[400px]">
         <CardHeader className="flex gap-3">
           <Image
-            src={urlToImage}
-            alt={title}
+            src={urlToImage || "https://loremflickr.com/640/320"}
+            alt={title || "title"}
             width={640}
             height={320}
             className="mb-4 rounded-lg w-full h-32 object-cover"
@@ -152,7 +148,7 @@ const NewsCard = ({
 
           <p className="text-gray-700 mb-2">
             <span className="font-semibold">Published:</span>{" "}
-            {new Date(publishedAt).toLocaleDateString()}
+            {new Date(publishedAt || "").toLocaleDateString()}
           </p>
 
           <p className="text-gray-700 mb-4">
@@ -166,15 +162,29 @@ const NewsCard = ({
               Read more
             </Link>
             <div className="flex items-end gap-2 ml-auto">
-              {/* Like Button */}
-              <Button
-                isIconOnly
-                color="default"
-                aria-label="Save"
-                onClick={handleSaveOption}
-              >
-                <StarIcon />
-              </Button>
+              {/* Save Button */}
+              {showSaveButton && (
+                <Button
+                  isIconOnly
+                  color="default"
+                  aria-label="Save"
+                  onClick={handleSaveOption}
+                >
+                  <StarIcon />
+                </Button>
+              )}
+
+              {/* Delete Button */}
+              {showDeleteButton && (
+                <Button
+                  isIconOnly
+                  color="default"
+                  aria-label="Delete"
+                  onClick={onDelete}
+                >
+                  <DeleteIcon />
+                </Button>
+              )}
 
               {/* Share Button */}
               <Button
@@ -192,7 +202,7 @@ const NewsCard = ({
                 onClose={onShareModalClose}
                 onOpenChange={onShareModalOpenChange}
                 onShareOption={handleShareOption}
-                articleUrl={url}
+                articleUrl={url || ""}
               />
             </div>
           </div>

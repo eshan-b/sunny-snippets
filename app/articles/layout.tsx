@@ -1,13 +1,13 @@
 import SimpleNavbar from "@/components/simple-navbar";
 
-export default function AccountLayout({
+export default function ArticlesLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   return (
     <>
-      <SimpleNavbar title="Account" />
+      <SimpleNavbar title="Articles" />
       <section>{children}</section>
     </>
   );

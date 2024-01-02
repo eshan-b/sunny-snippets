@@ -88,6 +88,7 @@ export const removeArticleForUser = async (
 
   if (userDoc.exists()) {
     const savedArticles = userDoc.data().savedArticles || [];
+    // Remove the article from the savedArticles array if it exists
     const updatedSavedArticles = savedArticles.filter(
       (id: any) => id !== articleId
     );
@@ -96,17 +97,35 @@ export const removeArticleForUser = async (
   }
 };
 
-// Function to get all news articles
-export const getAllNewsArticles = async () => {
+// Function to get news articles saved by a specific user
+export const getNewsArticlesForUser = async (userId: string) => {
   try {
-    const querySnapshot = await getDocs(newsArticlesCollection);
-    const articles: { id: string }[] = [];
-    querySnapshot.forEach((doc) => {
-      articles.push({ id: doc.id, ...doc.data() });
-    });
-    return articles;
+    const userRef = doc(usersCollection, userId);
+    const userDoc = await getDoc(userRef);
+
+    if (userDoc.exists()) {
+      const savedArticles = userDoc.data().savedArticles || [];
+      const articlePromises = savedArticles.map(async (articleId: string) => {
+        const articleDoc = await getDoc(doc(newsArticlesCollection, articleId));
+        if (articleDoc.exists()) {
+          return { id: articleDoc.id, ...articleDoc.data() };
+        } else {
+          console.warn(`News article with ID ${articleId} not found.`);
+          return null;
+        }
+      });
+
+      const articles = await Promise.all(articlePromises);
+      return articles.filter((article) => article !== null) as {
+        id: string;
+        [key: string]: any; // You might want to refine this type
+      }[];
+    } else {
+      console.error(`User document with ID ${userId} does not exist.`);
+      return [];
+    }
   } catch (error) {
-    console.error("Error getting news articles: ", error);
+    console.error("Error getting news articles for user: ", error);
     throw error;
   }
 };

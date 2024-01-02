@@ -52,7 +52,8 @@ function ProfileDropdown() {
               <p className="font-semibold">{`${user?.primaryEmailAddress}`}</p>
             </DropdownItem>
             <DropdownItem
-              key="profile"
+              key="articles"
+              href="/articles"
               startContent={<FaRegNewspaper className={iconClasses} />}
             >
               My Articles
