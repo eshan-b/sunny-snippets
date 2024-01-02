@@ -34,7 +34,7 @@ const ShareModal = ({
         <ModalHeader>Share Article</ModalHeader>
         <ModalBody>
           <Snippet symbol=" " variant="bordered">
-            <span className="text-wrap break-all">{`${articleUrl}`}</span>
+            <span className="text-wrap break-all whitespace-pre-wrap">{`${articleUrl}`}</span>
           </Snippet>
           <div className="flex flex-row gap-2">
             <Button onClick={() => onShareOption("email")} fullWidth>
